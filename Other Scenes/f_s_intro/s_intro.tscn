@@ -1,0 +1,157 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Other Scenes/f_s_intro/s_intro.gd" type="Script" id=1]
+[ext_resource path="res://Commons/r_dfd_button_font.tres" type="DynamicFontData" id=2]
+[ext_resource path="res://Commons/f_s_general_dialog/dialog-background.png" type="Texture" id=4]
+[ext_resource path="res://Commons/f_s_general_dialog/next-indicator.png" type="Texture" id=5]
+[ext_resource path="res://Commons/country-platform-preview.png" type="Texture" id=6]
+
+[sub_resource type="DynamicFont" id=1]
+size = 60
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 60
+font_data = ExtResource( 2 )
+
+[sub_resource type="GDScript" id=3]
+script/source = "extends Control
+
+var dialog = [
+	'Hello there, this tutorial is awesome.',
+	'If you like what you see, you can click the subscribe button',
+	'and if you don\\'t you shoud do it anyway!'
+]
+
+var dialog_index = 0
+var finished = false
+
+func _ready():
+	load_dialog()
+
+func _process(delta):
+	$\"next-indicator\".visible = finished
+	if Input.is_action_just_pressed(\"ui_accept\"):
+		load_dialog()
+
+func load_dialog():
+	if dialog_index < dialog.size():
+		finished = false
+		$RichTextLabel.bbcode_text = dialog[dialog_index]
+		$RichTextLabel.percent_visible = 0
+		$Tween.interpolate_property(
+			$RichTextLabel, \"percent_visible\", 0, 1, 1,
+			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT
+		)
+		$Tween.start()
+	else:
+		queue_free()
+	dialog_index += 1
+
+
+func _on_Tween_tween_completed(object, key):
+	finished = true
+"
+
+[sub_resource type="DynamicFont" id=4]
+size = 50
+font_data = ExtResource( 2 )
+
+[node name="s_intro" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="country-platform-preview" type="TextureRect" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -1008.0
+margin_top = -751.0
+margin_right = 998.0
+margin_bottom = 562.0
+texture = ExtResource( 6 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="clear_progress_button" type="Button" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 50.0
+margin_top = -150.0
+margin_right = 356.0
+margin_bottom = -50.0
+custom_fonts/font = SubResource( 1 )
+text = "Clear Progress"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="skip_intro_button" type="Button" parent="."]
+anchor_left = 0.828051
+anchor_top = 0.879802
+anchor_right = 0.983328
+anchor_bottom = 0.972
+margin_left = -19.2284
+margin_top = -20.1863
+margin_right = -17.3601
+margin_bottom = -19.76
+custom_fonts/font = SubResource( 2 )
+text = "Skip Intro"
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="DialogBox2" type="Control" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -500.0
+margin_top = -250.0
+margin_right = 500.0
+margin_bottom = -50.0
+script = SubResource( 3 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="DialogBox2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="DialogBox2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 15.0
+margin_top = 15.0
+margin_right = -15.0
+margin_bottom = -15.0
+custom_fonts/normal_font = SubResource( 4 )
+custom_colors/default_color = Color( 0.333333, 0.227451, 0.0862745, 1 )
+bbcode_enabled = true
+bbcode_text = "Hello there people from Youtube, This dialog is a placeholder. Hello world this is a long dialog? "
+text = "Hello there people from Youtube, This dialog is a placeholder. Hello world this is a long dialog? "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="next-indicator" type="Sprite" parent="DialogBox2"]
+position = Vector2( 950, 150 )
+scale = Vector2( 0.541, 0.511 )
+texture = ExtResource( 5 )
+
+[node name="Tween" type="Tween" parent="DialogBox2"]
+[connection signal="tween_completed" from="DialogBox2/Tween" to="DialogBox2" method="_on_Tween_tween_completed"]
