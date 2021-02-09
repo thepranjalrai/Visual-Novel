@@ -18,15 +18,16 @@ font_data = ExtResource( 2 )
 script/source = "extends Control
 
 var dialog = [
-	'Hello there, this tutorial is awesome.',
-	'If you like what you see, you can click the subscribe button',
-	'and if you don\\'t you shoud do it anyway!'
+	'bleppity',
+	'boopity',
+	'Dialogs were not loaded..'
 ]
 
 var dialog_index = 0
 var finished = false
 
 func _ready():
+	dialog = UtilityFuncs.read_dialogs(\"res://Other Scenes/f_s_intro/s_intro_dialogs.txt\")
 	load_dialog()
 
 func _process(delta):

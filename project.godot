@@ -21,6 +21,7 @@ _global_script_class_icons={
 [application]
 
 config/name="VN"
+run/main_scene="res://Other Scenes/f_s_intro/s_intro.tscn"
 config/icon="res://icon.png"
 
 [autoload]

@@ -22,3 +22,18 @@ static func traverse_dir(path: String, recursive := false):
 		
 	return paths
 	pass
+
+func read_dialogs(filepath: String):
+	var dialog_file = File.new()
+	dialog_file.open(filepath, File.READ)
+	
+	var content = []
+	if dialog_file:
+		while(!dialog_file.eof_reached()):
+			content.append(dialog_file.get_line())
+			print(content)
+	else:
+		print("Dialogs file not found..")
+		
+	return content
+	pass

@@ -3,6 +3,7 @@ extends Control
 func _ready():
 	$skip_intro_button.connect("pressed", self, "_skip_intro")
 	$clear_progress_button.connect("pressed", self, "_clear_progress")
+	
 	pass # Replace with function body.
 
 func _clear_progress():
