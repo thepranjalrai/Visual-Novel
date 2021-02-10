@@ -28,6 +28,7 @@ var finished = false
 
 func _ready():
 	dialog = UtilityFuncs.read_dialogs(\"res://Other Scenes/f_s_intro/s_intro_dialogs.txt\")
+	$\"next-indicator/next_button\".connect(\"pressed\", self, \"_on_next_button_pressed\")
 	load_dialog()
 
 func _process(delta):
@@ -52,6 +53,10 @@ func load_dialog():
 
 func _on_Tween_tween_completed(object, key):
 	finished = true
+
+func _on_next_button_pressed():
+	load_dialog()
+	pass
 "
 
 [sub_resource type="DynamicFont" id=4]
@@ -144,7 +149,7 @@ custom_fonts/normal_font = SubResource( 4 )
 custom_colors/default_color = Color( 0.333333, 0.227451, 0.0862745, 1 )
 bbcode_enabled = true
 bbcode_text = "Hello there people from Youtube, This dialog is a placeholder. Hello world this is a long dialog? "
-text = "Hello there people from Youtube, This dialog is a placeholder. Hello world this is a long dialog? "
+text = "Will load dialogs from \"res://Other Scenes/f_s_intro/s_intro_dialogs.txt\""
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -153,6 +158,17 @@ __meta__ = {
 position = Vector2( 950, 150 )
 scale = Vector2( 0.541, 0.511 )
 texture = ExtResource( 5 )
+
+[node name="next_button" type="TextureButton" parent="DialogBox2/next-indicator"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -25.5
+margin_top = -25.5
+margin_right = -25.5
+margin_bottom = -25.5
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Tween" type="Tween" parent="DialogBox2"]
 [connection signal="tween_completed" from="DialogBox2/Tween" to="DialogBox2" method="_on_Tween_tween_completed"]

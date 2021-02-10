@@ -1,22 +1,24 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Commons/r_dfd_button_font.tres" type="DynamicFontData" id=1]
+[ext_resource path="res://Commons/f_s_general_dialog/next-indicator.png" type="Texture" id=2]
 [ext_resource path="res://Commons/f_s_general_dialog/dialog-background.png" type="Texture" id=3]
-[ext_resource path="res://Commons/f_s_general_dialog/next-indicator.png" type="Texture" id=4]
 
-[sub_resource type="GDScript" id=4]
+[sub_resource type="GDScript" id=3]
 script/source = "extends Control
 
 var dialog = [
-	'Hello there, this tutorial is awesome.',
-	'If you like what you see, you can click the subscribe button',
-	'and if you don\\'t you shoud do it anyway!'
+	'bleppity',
+	'boopity',
+	'Dialogs were not loaded..'
 ]
 
 var dialog_index = 0
 var finished = false
 
 func _ready():
+	dialog = UtilityFuncs.read_dialogs(\"res://Other Scenes/f_s_intro/s_intro_dialogs.txt\")
+	$\"next-indicator/next_button\".connect(\"pressed\", self, \"_on_next_button_pressed\")
 	load_dialog()
 
 func _process(delta):
@@ -41,9 +43,13 @@ func load_dialog():
 
 func _on_Tween_tween_completed(object, key):
 	finished = true
+
+func _on_next_button_pressed():
+	load_dialog()
+	pass
 "
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=4]
 size = 50
 font_data = ExtResource( 1 )
 
@@ -56,7 +62,7 @@ margin_left = -500.0
 margin_top = -250.0
 margin_right = 500.0
 margin_bottom = -50.0
-script = SubResource( 4 )
+script = SubResource( 3 )
 __meta__ = {
 "_edit_group_": true,
 "_edit_use_anchors_": false
@@ -76,7 +82,7 @@ margin_left = 15.0
 margin_top = 15.0
 margin_right = -15.0
 margin_bottom = -15.0
-custom_fonts/normal_font = SubResource( 5 )
+custom_fonts/normal_font = SubResource( 4 )
 custom_colors/default_color = Color( 0.333333, 0.227451, 0.0862745, 1 )
 bbcode_enabled = true
 bbcode_text = "Hello there people from Youtube, This dialog is a placeholder. Hello world this is a long dialog? "
@@ -88,7 +94,18 @@ __meta__ = {
 [node name="next-indicator" type="Sprite" parent="."]
 position = Vector2( 950, 150 )
 scale = Vector2( 0.541, 0.511 )
-texture = ExtResource( 4 )
+texture = ExtResource( 2 )
+
+[node name="next_button" type="TextureButton" parent="next-indicator"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -25.5
+margin_top = -25.5
+margin_right = -25.5
+margin_bottom = -25.5
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Tween" type="Tween" parent="."]
 [connection signal="tween_completed" from="Tween" to="." method="_on_Tween_tween_completed"]
