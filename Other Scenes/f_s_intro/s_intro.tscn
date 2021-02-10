@@ -1,10 +1,12 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Other Scenes/f_s_intro/s_intro.gd" type="Script" id=1]
 [ext_resource path="res://Commons/r_dfd_button_font.tres" type="DynamicFontData" id=2]
+[ext_resource path="res://Commons/r_df_button_font.tres" type="DynamicFont" id=3]
 [ext_resource path="res://Commons/f_s_general_dialog/dialog-background.png" type="Texture" id=4]
 [ext_resource path="res://Commons/f_s_general_dialog/next-indicator.png" type="Texture" id=5]
 [ext_resource path="res://Commons/country-platform-preview.png" type="Texture" id=6]
+[ext_resource path="res://Commons/f_s_player_infobox/PlayerInfoBox.gd" type="Script" id=7]
 
 [sub_resource type="DynamicFont" id=1]
 size = 60
@@ -61,6 +63,18 @@ func _on_next_button_pressed():
 
 [sub_resource type="DynamicFont" id=4]
 size = 50
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 50
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 30
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 30
 font_data = ExtResource( 2 )
 
 [node name="s_intro" type="Control"]
@@ -147,9 +161,7 @@ margin_right = -15.0
 margin_bottom = -15.0
 custom_fonts/normal_font = SubResource( 4 )
 custom_colors/default_color = Color( 0.333333, 0.227451, 0.0862745, 1 )
-bbcode_enabled = true
-bbcode_text = "Hello there people from Youtube, This dialog is a placeholder. Hello world this is a long dialog? "
-text = "Will load dialogs from \"res://Other Scenes/f_s_intro/s_intro_dialogs.txt\""
+text = "Dialogs will be loaded from \"res://Other Scenes/f_s_intro/s_intro_dialogs.txt\""
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -171,4 +183,117 @@ __meta__ = {
 }
 
 [node name="Tween" type="Tween" parent="DialogBox2"]
+
+[node name="PlayerInfoBox" type="ColorRect" parent="."]
+margin_left = 148.367
+margin_top = 425.509
+margin_right = 748.367
+margin_bottom = 725.509
+color = Color( 0.34902, 0.501961, 0.180392, 0.411765 )
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Welcome Greeting" type="RichTextLabel" parent="PlayerInfoBox"]
+margin_top = 25.0
+margin_right = 600.0
+margin_bottom = 75.0
+custom_fonts/normal_font = SubResource( 5 )
+bbcode_enabled = true
+bbcode_text = "[center]Welcome to the Game[/center]"
+text = "Welcome to the Game"
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="Name Set" type="ColorRect" parent="PlayerInfoBox"]
+margin_left = 50.0
+margin_top = 80.0
+margin_right = 250.0
+margin_bottom = 230.0
+color = Color( 0.462745, 0.815686, 0.988235, 0.290196 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PlayerInfoBox/Name Set"]
+margin_left = 25.0
+margin_top = 25.0
+margin_right = 175.0
+margin_bottom = 50.0
+custom_fonts/normal_font = SubResource( 6 )
+bbcode_enabled = true
+bbcode_text = "[center]Name[/center]"
+text = "Name"
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="LineEdit" type="LineEdit" parent="PlayerInfoBox/Name Set"]
+margin_left = 25.0
+margin_top = 60.0
+margin_right = 175.0
+margin_bottom = 110.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Age Set" type="ColorRect" parent="PlayerInfoBox"]
+margin_left = 350.0
+margin_top = 80.0
+margin_right = 550.0
+margin_bottom = 230.0
+color = Color( 0.462745, 0.815686, 0.988235, 0.290196 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PlayerInfoBox/Age Set"]
+margin_left = 25.0
+margin_top = 25.0
+margin_right = 175.0
+margin_bottom = 50.0
+custom_fonts/normal_font = ExtResource( 3 )
+bbcode_enabled = true
+bbcode_text = "[center]Age[/center]"
+text = "Age"
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="LineEdit" type="LineEdit" parent="PlayerInfoBox/Age Set"]
+margin_left = 25.0
+margin_top = 60.0
+margin_right = 125.0
+margin_bottom = 110.0
+
+[node name="VScrollBar" type="VScrollBar" parent="PlayerInfoBox/Age Set"]
+margin_left = 150.0
+margin_top = 60.0
+margin_right = 170.0
+margin_bottom = 110.0
+min_value = 13.0
+max_value = 65.0
+step = 1.0
+value = 13.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="PlayerInfoBox"]
+margin_left = 200.0
+margin_top = 250.0
+margin_right = 400.0
+margin_bottom = 290.0
+custom_fonts/font = SubResource( 7 )
+text = "SAVE"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="tween_completed" from="DialogBox2/Tween" to="DialogBox2" method="_on_Tween_tween_completed"]
+[connection signal="value_changed" from="PlayerInfoBox/Age Set/VScrollBar" to="PlayerInfoBox" method="_on_Age_VScrollBar_value_changed"]
+[connection signal="pressed" from="PlayerInfoBox/Button" to="PlayerInfoBox" method="_on_Button_pressed"]

@@ -18,5 +18,23 @@ func _clear_progress():
 	pass
 
 func _skip_intro():
-	print("Changing scene..")
+	start_game()
+	pass
+	
+func start_game() -> bool:
+	#Check if user://player_info.json is correct
+	var file = File.new()
+	file.open("user://player_info.json", File.READ)
+	
+	if(file.is_open()):
+		var player_info = parse_json(file.get_line())
+		if(player_info['name'] == "null" or player_info['age'] == "-1"):
+			file.close()
+			return false		
+		file.close()
+		print("Changing scene..")
+		return true
+	else:
+		file.close()
+		return false
 	pass
