@@ -1,10 +1,12 @@
 # Visual Novel
-> This repo is currently private and meant to be accessed by only those who are working on this project
+> This repository is currently private and meant to be accessed by only those who are working on this project
 
 __Please read the following links__ before starting with collaboration on git
 1. [Using Git and GitHub for Team Collaboration](https://docs.google.com/document/d/1mKd73Ums7ni0IoFjBYn3bLag_5NwFDtxpwCU-Xra1sY/edit?usp=sharing)
 2. [Version Control (Git Plugin) in Godot Editor](https://docs.godotengine.org/en/stable/getting_started/workflow/project_setup/version_control_systems.html)
+
 And of course-
+
 3. [The Godot Official Documentation](https://docs.godotengine.org/en/stable/index.html)
 
 ## Resource Nomenclature
@@ -27,14 +29,20 @@ Whenever you instance a _common_ scene in your work, if you need to    make chan
 - Right Click on the instanced Scene (node)
 - Select the **Make scene Local** option
 
-This will copy the scene as part of the parent scene and will no longer further the scene file saved in commons/
+This will copy the scene as part of the parent scene and will no longer ruin the scene file saved in commons/
 
 However, any **resources referenced** e.g. (textures and most importantly, _scripts_) in the instanced node, **will point to the same location on disk**. To overcome that, make sure to manually and    recursively make all sub-resources and their properties local, (if    required) and save new resources in the current scene folder.
 
-- ### Levels/
-To have 8 directories names "Level1/", "Level2/".. to save Level scene and resources local to the level. Pretty self explanatory.
-- ### Other Scenes/
+ - ### Levels/
+To have 8 sub-directories names "Level1/", "Level2/".. to save Level scene and resources local to the level. Pretty self explanatory.
+ - ### Other Scenes/
 To have scenes that are not really _reusable_ (as in commons/) and not really level related. e.g. the Intro scene.
 
-## More to be added later ¯\_(ツ)_/¯
-> beep boop, please text me queries, pls pls, Ive read a lot and I'm almost working alone in the dev dept. Sorry for the push.
+>_Do not move any files around the repository without prior discussion. There are formalities that will need to be synced with the editor as well as collaborators._
+
+## Contributing to the project
+We have to be _very_ communicative about our work and try best not to touch files that are being used by other people. Let's figure out branches that everyone is going to work on, and how to merge them safely.
+
+## More to be added later `¯\_(ツ)_/¯`
+Working  with the Godot editor is going to be quite a task, _please (I insist) contact me for any queries._
+>(Pranjal)
