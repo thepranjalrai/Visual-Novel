@@ -3,6 +3,7 @@ extends Control
 func _ready():
 	$skip_intro_button.connect("pressed", self, "_skip_intro")
 	$clear_progress_button.connect("pressed", self, "_clear_progress")
+	$PlayerInfoBox.connect("time_for_story_intro", self, "story_intro")
 	
 	pass # Replace with function body.
 
@@ -16,13 +17,8 @@ func _clear_progress():
 			print("Deleting ", path)
 			deleter.remove(path)
 	pass
-
-func _skip_intro():
-	start_game()
-	pass
 	
-func start_game() -> bool:
-	#Check if user://player_info.json is correct
+func check_player_info():
 	var file = File.new()
 	file.open("user://player_info.json", File.READ)
 	
@@ -32,9 +28,22 @@ func start_game() -> bool:
 			file.close()
 			return false		
 		file.close()
-		print("Changing scene..")
 		return true
 	else:
 		file.close()
 		return false
 	pass
+	
+func _skip_intro():
+	if check_player_info():
+		print("Player info is ok, Changing scene to Level1.")
+	pass
+
+func story_intro():
+	if check_player_info():
+		$PlayerInfoBox.visible = false
+		$DialogBox2.dialog_index = $DialogBox2.dialog.size() + 1
+		print("<Write code/scene for introduction of story here")
+		
+		_skip_intro()
+		pass # Replace with function body.

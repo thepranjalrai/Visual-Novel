@@ -44,7 +44,7 @@ func load_dialog():
 		$RichTextLabel.bbcode_text = dialog[dialog_index]
 		$RichTextLabel.percent_visible = 0
 		$Tween.interpolate_property(
-			$RichTextLabel, \"percent_visible\", 0, 1, 1,
+			$RichTextLabel, \"percent_visible\", 0, 1, dialog[dialog_index].length()/30,
 			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT
 		)
 		$Tween.start()
@@ -295,5 +295,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 [connection signal="tween_completed" from="DialogBox2/Tween" to="DialogBox2" method="_on_Tween_tween_completed"]
+[connection signal="time_for_story_intro" from="PlayerInfoBox" to="." method="_on_PlayerInfoBox_time_for_story_intro"]
 [connection signal="value_changed" from="PlayerInfoBox/Age Set/VScrollBar" to="PlayerInfoBox" method="_on_Age_VScrollBar_value_changed"]
 [connection signal="pressed" from="PlayerInfoBox/Button" to="PlayerInfoBox" method="_on_Button_pressed"]

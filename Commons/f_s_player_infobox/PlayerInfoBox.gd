@@ -1,5 +1,7 @@
 extends ColorRect
 
+signal time_for_story_intro
+
 var player_info = {
 	"name" : "null",
 	"age" : -1
@@ -22,6 +24,7 @@ func _on_Button_pressed(): #Code to save player info to a file
 		print("Written ", to_json(player_info), " to user://player_info.json")
 
 	file.close()
+	emit_signal("time_for_story_intro")
 	pass # Replace with function body.
 
 func _on_Name_LineEdit_text_changed(new_text):
