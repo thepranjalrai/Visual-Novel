@@ -1,15 +1,33 @@
 extends Control
 
+export var dialog_file_path: String
+export var dialog_index_begin: int
+export var dialog_index_end: int	#exclusive
+
 var dialog = [
-	'Hello there, this tutorial is awesome.',
-	'If you like what you see, you can click the subscribe button',
-	'and if you don\'t you shoud do it anyway!'
+	'bleppity',
+	'boopity',
+	'Dialogs were not loaded..'
 ]
 
 var dialog_index = 0
 var finished = false
 
 func _ready():
+	dialog = UtilityFuncs.read_dialogs(dialog_file_path)
+	$"next-indicator/next_button".connect("pressed", self, "_on_next_button_pressed")
+	
+	var dialog_index = dialog_index_begin
+	
+	if(dialog_index_begin < 0 or dialog_index_begin >= dialog_index_end):
+		$RichTextLabel.text = "Dialog Index Error"
+		print("Dialog Index Error")
+		return
+	if(dialog_index_end > dialog.size()):
+		$RichTextLabel.text = "Dialog Index Error"
+		print("Dialog Index Error")
+		return
+	
 	load_dialog()
 
 func _process(delta):
@@ -18,12 +36,12 @@ func _process(delta):
 		load_dialog()
 
 func load_dialog():
-	if dialog_index < dialog.size():
+	if dialog_index < dialog_index_end:
 		finished = false
 		$RichTextLabel.bbcode_text = dialog[dialog_index]
 		$RichTextLabel.percent_visible = 0
 		$Tween.interpolate_property(
-			$RichTextLabel, "percent_visible", 0, 1, 1,
+			$RichTextLabel, "percent_visible", 0, 1, dialog[dialog_index].length()/30,
 			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT
 		)
 		$Tween.start()
@@ -34,3 +52,7 @@ func load_dialog():
 
 func _on_Tween_tween_completed(object, key):
 	finished = true
+
+func _on_next_button_pressed():
+	load_dialog()
+	pass

@@ -31,9 +31,9 @@ func read_dialogs(filepath: String):
 	if dialog_file:
 		while(!dialog_file.eof_reached()):
 			content.append(dialog_file.get_line())
-			print(content)
 	else:
 		print("Dialogs file not found..")
 		
+	print(content)
 	return content
 	pass

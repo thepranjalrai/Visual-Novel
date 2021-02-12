@@ -42,7 +42,7 @@ func _skip_intro():
 func story_intro():
 	if check_player_info():
 		$PlayerInfoBox.visible = false
-		$DialogBox2.dialog_index = $DialogBox2.dialog.size() + 1
+		$DialogBox.dialog_index = $DialogBox.dialog.size() + 1
 		print("<Write code/scene for introduction of story here")
 		
 		_skip_intro()
