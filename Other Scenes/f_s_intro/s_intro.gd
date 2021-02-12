@@ -35,6 +35,13 @@ func check_player_info():
 	pass
 	
 func _skip_intro():
+	#Prepare user:// Directory Tree
+	var dir_manager = Directory.new()
+	dir_manager.open("user://")
+	for i in range(1, 9, 1):
+		if( dir_manager.dir_exists("Level" + str(i)) ) : continue
+		dir_manager.make_dir("Level" + str(i))
+	
 	if check_player_info():
 		print("Player info is ok, Changing scene to Level1.")
 	pass

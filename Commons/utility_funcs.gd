@@ -34,6 +34,6 @@ func read_dialogs(filepath: String):
 	else:
 		print("Dialogs file not found..")
 		
-	print(content)
+	#print(content)
 	return content
 	pass
