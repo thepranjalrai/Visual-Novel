@@ -19,6 +19,7 @@ func _ready():
 	pass # Replace with function body.
 	
 func enter_shop_1():
+	print("entering shop 1")
 	for node in get_children():
 		if(node.name == "shop_1_branch"):
 			var dbox = $shop_1_branch/shop_1_dialog
@@ -29,10 +30,11 @@ func enter_shop_1():
 	pass
 
 func enter_shop_2():
+	print("entering shop 2")
 	for node in get_children():
 		if(node.name == "shop_2_branch"):
 			var dbox = $shop_2_branch/shop_2_dialog
-			funcref(dbox, "initialize").call_func(4,7)
+			funcref(dbox, "initialize").call_func(4,7)			
 			node.visible = true
 		else:
 			node.visible = false

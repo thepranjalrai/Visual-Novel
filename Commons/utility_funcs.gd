@@ -1,5 +1,7 @@
 extends Node
 
+var QnA = preload("res://Commons/f_s_qna/QnA.tscn")
+
 static func traverse_dir(path: String, recursive := false):
 	var paths = []
 	var dir = Directory.new()

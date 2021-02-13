@@ -4,6 +4,8 @@ export var dialog_file_path: String
 export var dialog_index_begin: int
 export var dialog_index_end: int	#exclusive
 
+signal dialog_over
+
 var dialog = [
 	'bleppity',
 	'boopity',
@@ -52,7 +54,8 @@ func load_dialog():
 			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT
 		)
 		$Tween.start()
-	#else:
+	else:
+		emit_signal("dialog_over")
 		#queue_free()
 	dialog_index += 1
 
