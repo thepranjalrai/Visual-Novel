@@ -15,20 +15,27 @@ var finished = false
 
 func _ready():
 	dialog = UtilityFuncs.read_dialogs(dialog_file_path)
+	print("\nLoaded by : ", self.name, " ", dialog.size(), " ", dialog_index_begin, " ", dialog_index_end)
 	$"next-indicator/next_button".connect("pressed", self, "_on_next_button_pressed")
+	initialize()
+	pass	
+
+func initialize(index_begin = dialog_index_begin, index_end = dialog_index_end):
+	dialog_index = index_begin
+	dialog_index_begin = index_begin
+	dialog_index_end = index_end
 	
-	var dialog_index = dialog_index_begin
-	
-	if(dialog_index_begin < 0 or dialog_index_begin >= dialog_index_end):
-		$RichTextLabel.text = "Dialog Index Error"
+	if(index_begin < 0 or index_begin >= index_end):
+		#$RichTextLabel.text = "Dialog Index Error"
 		print("Dialog Index Error")
 		return
-	if(dialog_index_end > dialog.size()):
-		$RichTextLabel.text = "Dialog Index Error"
+	if(index_end > dialog.size()):
+		#$RichTextLabel.text = "Dialog Index Error"
 		print("Dialog Index Error")
 		return
 	
 	load_dialog()
+	pass
 
 func _process(delta):
 	$"next-indicator".visible = finished
@@ -45,10 +52,9 @@ func load_dialog():
 			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT
 		)
 		$Tween.start()
-	else:
-		queue_free()
+	#else:
+		#queue_free()
 	dialog_index += 1
-
 
 func _on_Tween_tween_completed(object, key):
 	finished = true

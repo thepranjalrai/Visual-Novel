@@ -5,3 +5,4 @@ Where would you like to go first?
 Oh look! your friend Ron is here!
 Do you want to go talk to him?
 (Click on the option of your choice)
+(Click the objects you want to purchase)
