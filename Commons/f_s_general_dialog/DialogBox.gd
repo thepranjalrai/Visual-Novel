@@ -54,9 +54,10 @@ func load_dialog():
 			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT
 		)
 		$Tween.start()
-	else:
-		emit_signal("dialog_over")
-		#queue_free()
+		if dialog_index == dialog_index_end-1:
+			emit_signal("dialog_over")
+#	else:
+#		queue_free()
 	dialog_index += 1
 
 func _on_Tween_tween_completed(object, key):

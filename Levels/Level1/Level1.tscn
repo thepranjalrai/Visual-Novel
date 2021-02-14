@@ -58,7 +58,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="shop_1_dialog" parent="shop_1_branch" instance=ExtResource( 1 )]
+[node name="DialogBox" parent="shop_1_branch" instance=ExtResource( 1 )]
 dialog_file_path = "res://Levels/Level1/Level1_dialogs.txt"
 dialog_index_begin = 7
 dialog_index_end = 8
@@ -71,7 +71,7 @@ texture = ExtResource( 3 )
 expand = true
 stretch_mode = 6
 
-[node name="shop_2_dialog" parent="shop_2_branch" instance=ExtResource( 1 )]
+[node name="DialogBox" parent="shop_2_branch" instance=ExtResource( 1 )]
 dialog_file_path = "res://Levels/Level1/Level1_dialogs.txt"
 dialog_index_begin = 7
 dialog_index_end = 8

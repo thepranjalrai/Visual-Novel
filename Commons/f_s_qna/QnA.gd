@@ -17,11 +17,21 @@ func _ready():
 	print($button_disagree.connect("pressed", self, "save_ans", ["disagree"]))
 	pass # Replace with function body.
 
-func popup(q, a_t, d_t, q_no):
-	$RichTextLabel.bbcode_text = "[center]" + q + "[/center]"
-	$button_agree.text = a_t
-	$button_disagree.text = d_t
-	question_number = q_no
+func popup(q, a_t, d_t):
+	question = q
+	$RichTextLabel.bbcode_text = "[center]" + question + "[/center]"
+	
+	var agree_button = $button_agree #.text = a_t
+	var disagree_button = $button_disagree #.text = d_t
+	
+	# HAS TO BE FIXED
+	agree_button.text = a_t
+	agree_button.get("custom_fonts/font").set_size(100 - (a_t.length()/30)*10)
+	print("1st button font size : ", 100 - a_t.length()/2)
+	
+	disagree_button.text = d_t
+	disagree_button.get("custom_fonts/font").set_size(100 - (d_t.length()/30)*10)
+	print("2st button font size : ", 100 - a_t.length()/2)
 	
 	self.visible = true	
 	pass
@@ -40,7 +50,7 @@ func save_ans(ans: String):
 	
 	if(data_file.is_open()):
 		#data["lol"] = "hihhi"
-		var key = str(question_number)
+		var key = str(question)
 		var value = ans
 		
 		data[key] = value
