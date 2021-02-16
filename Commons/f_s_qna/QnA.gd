@@ -8,13 +8,13 @@ export var question_number: int = 0
 var data = {}
 
 func _ready():
-	self.visible = false
+	#self.visible = false
 	$RichTextLabel.bbcode_text = "[center]" + question + "[/center]"
-	$button_agree.text = agree_text
-	$button_disagree.text = disagree_text
+	$button_agree.get_node("button_text").text = agree_text
+	$button_disagree.get_node("button_text").text = disagree_text
 	
-	print($button_agree.connect("pressed", self, "save_ans", ["agree"]))
-	print($button_disagree.connect("pressed", self, "save_ans", ["disagree"]))
+	$button_agree.get_node("button").connect("pressed", self, "save_ans", ["agree"])
+	$button_disagree.get_node("button").connect("pressed", self, "save_ans", ["disagree"])
 	pass # Replace with function body.
 
 func popup(q, a_t, d_t):
@@ -24,14 +24,8 @@ func popup(q, a_t, d_t):
 	var agree_button = $button_agree #.text = a_t
 	var disagree_button = $button_disagree #.text = d_t
 	
-	# HAS TO BE FIXED
-	agree_button.text = a_t
-	agree_button.get("custom_fonts/font").set_size(100 - (a_t.length()/30)*10)
-	print("1st button font size : ", 100 - a_t.length()/2)
-	
-	disagree_button.text = d_t
-	disagree_button.get("custom_fonts/font").set_size(100 - (d_t.length()/30)*10)
-	print("2st button font size : ", 100 - a_t.length()/2)
+	agree_button.get_node("button_text").bbcode_text = "[center]" + a_t + "[/center]"	
+	disagree_button.get_node("button_text").bbcode_text = "[center]" + d_t + "[/center]"
 	
 	self.visible = true	
 	pass
@@ -43,7 +37,7 @@ func save_ans(ans: String):
 		data_file.open("user://QnA_data.json", File.READ)
 		var file_data = parse_json(data_file.get_line())
 		if(file_data): data = file_data
-		print("Data read : ", data)
+		print("Data read : ", to_json(data))
 		data_file.close()
 	
 	data_file.open("user://QnA_data.json", File.WRITE)

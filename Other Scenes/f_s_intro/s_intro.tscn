@@ -2,7 +2,6 @@
 
 [ext_resource path="res://Other Scenes/f_s_intro/s_intro.gd" type="Script" id=1]
 [ext_resource path="res://Commons/r_dfd_button_font.tres" type="DynamicFontData" id=2]
-[ext_resource path="res://Commons/r_df_button_font.tres" type="DynamicFont" id=3]
 [ext_resource path="res://Commons/f_s_general_dialog/general_dialog.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Commons/country-platform-preview.png" type="Texture" id=6]
 [ext_resource path="res://Commons/f_s_player_infobox/PlayerInfoBox.gd" type="Script" id=7]
@@ -24,6 +23,10 @@ size = 30
 font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=5]
+size = 30
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=6]
 size = 30
 font_data = ExtResource( 2 )
 
@@ -154,7 +157,7 @@ margin_left = 25.0
 margin_top = 25.0
 margin_right = 175.0
 margin_bottom = 50.0
-custom_fonts/normal_font = ExtResource( 3 )
+custom_fonts/normal_font = SubResource( 5 )
 bbcode_enabled = true
 bbcode_text = "[center]Age[/center]"
 text = "Age"
@@ -187,7 +190,7 @@ margin_left = 200.0
 margin_top = 250.0
 margin_right = 400.0
 margin_bottom = 290.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 6 )
 text = "SAVE"
 __meta__ = {
 "_edit_use_anchors_": false

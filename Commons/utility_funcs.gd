@@ -2,6 +2,21 @@ extends Node
 
 var QnA = preload("res://Commons/f_s_qna/QnA.tscn")
 
+func read_player_info() -> Dictionary:
+	var player_information: Dictionary
+	var file = File.new()
+	file.open("user://player_info.json", File.READ)
+	
+	if(file.is_open()):
+		player_information = parse_json(file.get_line())
+	else:
+		print("Could not load player_info\n")
+	
+	print(player_information)
+	return player_information
+	file.close()
+	pass
+
 static func traverse_dir(path: String, recursive := false):
 	var paths = []
 	var dir = Directory.new()

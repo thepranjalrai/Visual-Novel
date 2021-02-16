@@ -17,7 +17,7 @@ var finished = false
 
 func _ready():
 	dialog = UtilityFuncs.read_dialogs(dialog_file_path)
-	print("\nLoaded by : ", self.name, " ", dialog.size(), " ", dialog_index_begin, " ", dialog_index_end)
+	#print("\nLoaded by : ", self.name, " ", dialog.size(), " ", dialog_index_begin, " ", dialog_index_end)
 	$"next-indicator/next_button".connect("pressed", self, "_on_next_button_pressed")
 	initialize()
 	pass	
@@ -39,7 +39,7 @@ func initialize(index_begin = dialog_index_begin, index_end = dialog_index_end):
 	load_dialog()
 	pass
 
-func _process(delta):
+func _process(_delta):
 	$"next-indicator".visible = finished
 	if Input.is_action_just_pressed("ui_accept"):
 		load_dialog()
@@ -60,7 +60,7 @@ func load_dialog():
 #		queue_free()
 	dialog_index += 1
 
-func _on_Tween_tween_completed(object, key):
+func _on_Tween_tween_completed(_object, _key):
 	finished = true
 
 func _on_next_button_pressed():
