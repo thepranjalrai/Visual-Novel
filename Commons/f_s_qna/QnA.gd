@@ -17,8 +17,9 @@ func _ready():
 	$button_disagree.get_node("button").connect("pressed", self, "save_ans", ["disagree"])
 	pass # Replace with function body.
 
-func popup(q, a_t, d_t):
+func popup(q_no, q, a_t, d_t):
 	question = q
+	question_number = q_no
 	$RichTextLabel.bbcode_text = "[center]" + question + "[/center]"
 	
 	var agree_button = $button_agree #.text = a_t
@@ -44,7 +45,7 @@ func save_ans(ans: String):
 	
 	if(data_file.is_open()):
 		#data["lol"] = "hihhi"
-		var key = str(question)
+		var key = str(question_number)
 		var value = ans
 		
 		data[key] = value

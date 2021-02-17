@@ -13,8 +13,8 @@ func read_player_info() -> Dictionary:
 		print("Could not load player_info\n")
 	
 	print(player_information)
-	return player_information
 	file.close()
+	return player_information
 	pass
 
 static func traverse_dir(path: String, recursive := false):

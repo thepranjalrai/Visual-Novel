@@ -22,19 +22,19 @@ func _ready():
 	
 	player_details = UtilityFuncs.read_player_info()
 	questions = {
-		"1" : "Do you want to talk to your friend Ron?",
-		"2" : "Ron: Hello, " + player_details["name"] + ". How was your summer break?",
-		"3" : "Ron: Great " + player_details["name"] + ". My summer was not that good. I enjoyed the first month very much. But then, afterwards I got very bored.",
-		"4" : "Ron: Are you excited and ready for the school?",
-		"5" : "Ron: Earlier my sibling were there with me so first month was really fun. But, as soon as they left, I was alone and had nothing to do but to help mom with all house work",
+		1 : "Do you want to talk to your friend Ron?",
+		2 : "Ron: Hello, " + player_details["name"] + ". How was your summer break?",
+		3 : "Ron: Great " + player_details["name"] + ". My summer was not that good. I enjoyed the first month very much. But then, afterwards I got very bored.",
+		4 : "Ron: Are you excited and ready for the school?",
+		5 : "Ron: Earlier my sibling were there with me so first month was really fun. But, as soon as they left, I was alone and had nothing to do but to help mom with all house work",
 		"default" : "(Choose your response.)"
 	}
 	responses = {
-		"1" : ["Yes, No"],
-		"2" : ["Very Good, I visited India with my parents, played various games with friends, read some books, went on hiking trip, How was your summer?", "Actually, very good. How was your summer?"],
-		"3" : ["Oh, okay.", "Oh, What happened?"],
-		"4" : ["Yeah", "I am excited, but nervous also. Last year wasn’t very great one for me. I hope this year will be different and more fun. I am ready mentally, but there are still stuff that I need to buy before getting all set for the school."],
-		"5" : ["Oh, poor Ron.", "Oh, Ron. I feel sorry for you. Maybe next time we can spend our summer together, that way it would be fun for both of us."]
+		1 : ["Yes", "No"],
+		2 : ["Very Good, I visited India with my parents, played various games with friends, read some books, went on hiking trip, How was your summer?", "Actually, very good. How was your summer?"],
+		3 : ["Oh, okay.", "Oh, What happened?"],
+		4 : ["Yeah", "I am excited, but nervous also. Last year wasn’t very great one for me. I hope this year will be different and more fun. I am ready mentally, but there are still stuff that I need to buy before getting all set for the school."],
+		5 : ["Oh, poor Ron.", "Oh, Ron. I feel sorry for you. Maybe next time we can spend our summer together, that way it would be fun for both of us."]
 	}
 	pass
 	
@@ -57,5 +57,5 @@ func popup_qn(var qn: int):
 	print("Poppping up the first")
 	var qna_popup = UtilityFuncs.QnA.instance()
 	add_child(qna_popup)
-	qna_popup.popup(questions["2"], responses["2"][0], responses["2"][1])
+	qna_popup.popup(qn, questions[qn], responses[qn][0], responses[qn][1])
 	pass

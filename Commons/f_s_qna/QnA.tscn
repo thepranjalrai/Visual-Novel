@@ -11,11 +11,11 @@ font_data = ExtResource( 1 )
 size = 50
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=3]
 size = 50
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=4]
 size = 50
 font_data = ExtResource( 1 )
 
@@ -79,7 +79,7 @@ margin_left = 20.0
 margin_top = 20.0
 margin_right = -150.0
 margin_bottom = -20.0
-custom_fonts/normal_font = SubResource( 4 )
+custom_fonts/normal_font = SubResource( 3 )
 bbcode_enabled = true
 bbcode_text = "duh"
 text = "duh"
@@ -102,7 +102,7 @@ margin_left = 1170.0
 margin_top = 20.0
 margin_right = -20.0
 margin_bottom = -20.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
