@@ -1,9 +1,16 @@
 extends Control
 
 var runtime_data = {
-	"Finished Shop 1" : false,
-	"Finished Shop 2" : false
+	"Finished Shop 1"   : false,
+	"Finished Shop 2"   : false,
+	
+	"Popped Question 1" : false,
+	"Popped Question 2" : false,
+	"Popped Question 3" : false,
+	"Popped Question 4" : false,
+	"Popped Question 5" : false
 }
+
 var player_details: Dictionary
 var questions: Dictionary
 var responses: Dictionary
@@ -60,26 +67,27 @@ func focus_node(var _node):
 func qna_manager():
 	thread = Thread.new()
 	thread.start(self, "popup_qn", 1)
-	OS.delay_msec(500)
+	#OS.delay_msec(500)
+	
 	thread = Thread.new()
 	thread.start(self, "popup_qn", 2)
 	pass
 	
 func popup_qn(var qn: int):
+	#print("Qn:", qn, "is waiting.")
 	while(sem > 0):
 		OS.delay_msec(100)
-		print("Qn", qn, "is waiting.")
 	sem += 1
-	print("Sem = ", sem)
+	#print("Sem = ", sem)
 	
-	print("Poppping up the first")
+	print("Poppping up Qn:", qn)
 	var qna_popup = UtilityFuncs.QnA.instance()
 	add_child(qna_popup)
 	qna_popup.popup(qn, questions[qn], responses[qn][0], responses[qn][1])
-	qna_popup.connect("qna_over", self, "reduce_dialogbox_sem")
+	qna_popup.connect("qna_over", self, "reduce_qna_popup_sem")
 	pass
 	
-func reduce_dialogbox_sem():
+func reduce_qna_popup_sem():
 	sem -= 1
-	print("Sem = ", sem)
+	#print("Sem = ", sem)
 	pass
