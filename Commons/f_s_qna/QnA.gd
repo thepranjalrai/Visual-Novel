@@ -6,6 +6,7 @@ export var disagree_text: String = "??"
 export var question_number: int = 0
 
 var data = {}
+signal qna_over
 
 func _ready():
 	#self.visible = false
@@ -56,5 +57,6 @@ func save_ans(ans: String):
 	print("Data written : ", to_json(data))
 	
 	data_file.close()
+	emit_signal("qna_over")
 	self.queue_free()
 	pass

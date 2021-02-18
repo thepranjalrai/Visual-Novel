@@ -8,7 +8,11 @@ var player_details: Dictionary
 var questions: Dictionary
 var responses: Dictionary
 
+var thread: Thread
+var sem: int
+
 func _ready():
+	sem = 0
 	#Make a level data file
 	var runtime_datafile = File.new()
 	runtime_datafile.open("user://Level1/runtime_data.json", File.WRITE)
@@ -50,12 +54,32 @@ func focus_node(var _node):
 		else:
 			node.visible = false
 	
-	dbox.connect("dialog_over", self, "popup_qn", [1])
+	dbox.connect("dialog_over", self, "qna_manager")
+	pass
+	
+func qna_manager():
+	thread = Thread.new()
+	thread.start(self, "popup_qn", 1)
+	OS.delay_msec(500)
+	thread = Thread.new()
+	thread.start(self, "popup_qn", 2)
 	pass
 	
 func popup_qn(var qn: int):
+	while(sem > 0):
+		OS.delay_msec(100)
+		print("Qn", qn, "is waiting.")
+	sem += 1
+	print("Sem = ", sem)
+	
 	print("Poppping up the first")
 	var qna_popup = UtilityFuncs.QnA.instance()
 	add_child(qna_popup)
 	qna_popup.popup(qn, questions[qn], responses[qn][0], responses[qn][1])
+	qna_popup.connect("qna_over", self, "reduce_dialogbox_sem")
+	pass
+	
+func reduce_dialogbox_sem():
+	sem -= 1
+	print("Sem = ", sem)
 	pass
