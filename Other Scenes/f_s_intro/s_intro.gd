@@ -44,6 +44,7 @@ func _skip_intro():
 	
 	if check_player_info():
 		print("Player info is ok, Changing scene to Level1.")
+		get_tree().change_scene("res://Levels/Level1/Level1.tscn")	#Level 1
 	pass
 
 func story_intro():

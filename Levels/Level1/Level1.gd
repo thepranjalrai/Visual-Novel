@@ -67,27 +67,34 @@ func focus_node(var _node):
 func qna_manager():
 	thread = Thread.new()
 	thread.start(self, "popup_qn", 1)
-	#OS.delay_msec(500)
 	
 	thread = Thread.new()
 	thread.start(self, "popup_qn", 2)
+	
+	thread = Thread.new()
+	thread.start(self, "popup_qn", 3)
+	
+	thread = Thread.new()
+	thread.start(self, "popup_qn", 4)
+	
+	thread = Thread.new()
+	thread.start(self, "popup_qn", 5)
 	pass
 	
 func popup_qn(var qn: int):
-	#print("Qn:", qn, "is waiting.")
-	while(sem > 0):
+	print("Qn:", qn, "is waiting.")
+	while(sem < qn-1):
 		OS.delay_msec(100)
-	sem += 1
-	#print("Sem = ", sem)
+	print("Sem = ", sem)
 	
-	print("Poppping up Qn:", qn)
+	print("\nPopping up Qn:", qn, " because, sem=", sem)
 	var qna_popup = UtilityFuncs.QnA.instance()
 	add_child(qna_popup)
 	qna_popup.popup(qn, questions[qn], responses[qn][0], responses[qn][1])
-	qna_popup.connect("qna_over", self, "reduce_qna_popup_sem")
+	qna_popup.connect("qna_over", self, "increase_qna_popup_sem")
 	pass
 	
-func reduce_qna_popup_sem():
-	sem -= 1
-	#print("Sem = ", sem)
+func increase_qna_popup_sem():
+	sem += 1
+	print("Sem = ", sem)
 	pass
