@@ -1,6 +1,7 @@
 extends Node
 
 var QnA = preload("res://Commons/f_s_qna/QnA.tscn")
+var ans_filepath = "user://QnA_data.json"
 
 func read_player_info() -> Dictionary:
 	var player_information: Dictionary
@@ -16,6 +17,29 @@ func read_player_info() -> Dictionary:
 	file.close()
 	return player_information
 	pass
+
+func read_saved_answer(qn: int) -> bool:
+	var ans: bool
+	var ans_file = File.new()
+	ans_file.open(ans_filepath, File.READ)
+	
+	if(ans_file.is_open()):
+		#print('Reading Ans of Qn : ', qn)
+		var answers = parse_json(ans_file.get_line())
+		ans_file.close()
+		#print("bruh? ", answers[str(qn)])
+		
+		if (answers[str(qn)] == 'agree'):
+			ans = true
+		elif (answers[str(qn)] == 'disagree'):
+			ans = false
+
+		#print("Ans is : ", ans)
+	else:
+		print("Could not load player_info\n")
+		OS.exit()
+		
+	return ans
 
 static func traverse_dir(path: String, recursive := false):
 	var paths = []
