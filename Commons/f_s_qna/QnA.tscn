@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Commons/r_dfd_button_font.tres" type="DynamicFontData" id=1]
 [ext_resource path="res://Commons/f_s_qna/QnA.gd" type="Script" id=2]
+[ext_resource path="res://images/bkg hallway.png" type="Texture" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 size = 100
@@ -94,6 +95,9 @@ margin_left = 100.0
 margin_top = -175.0
 margin_right = 1400.0
 margin_bottom = -25.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="button" type="Button" parent="button_disagree"]
 anchor_right = 1.0
@@ -121,3 +125,11 @@ text = "duh"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="bkg hallway" type="Sprite" parent="."]
+modulate = Color( 0.152941, 0.117647, 0.117647, 1 )
+show_behind_parent = true
+light_mask = 8233
+position = Vector2( 751.958, 334.817 )
+scale = Vector2( 1.49984, 1.49881 )
+texture = ExtResource( 3 )
