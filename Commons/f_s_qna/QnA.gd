@@ -39,7 +39,7 @@ func save_ans(ans: String):
 		data_file.open("user://QnA_data.json", File.READ)
 		var file_data = parse_json(data_file.get_line())
 		if(file_data): data = file_data
-		print("Data read : ", to_json(data))
+		#print("Data read : ", to_json(data))
 		data_file.close()
 	
 	data_file.open("user://QnA_data.json", File.WRITE)
@@ -54,7 +54,7 @@ func save_ans(ans: String):
 		print("Error: File not open")
 	
 	data_file.store_line(to_json(data))
-	print("Data written : ", to_json(data))
+	#print("Data written : ", to_json(data))
 	
 	data_file.close()
 	emit_signal("qna_over")

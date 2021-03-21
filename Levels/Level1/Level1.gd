@@ -15,6 +15,7 @@ var player_details: Dictionary
 var questions: Dictionary
 var responses: Dictionary
 var follow_up_dialogs: Dictionary
+var follow_up_question: Dictionary
 
 var player_name: String
 
@@ -52,8 +53,18 @@ func _ready():
 		5 : ["Oh, poor Ron.", "Oh, Ron. I feel sorry for you. Maybe next time we can spend our summer together, that way it would be fun for both of us."]
 	}
 	follow_up_dialogs = {
-		1 : [[player_name + " : Hey Ron!", "Ron : Hello " + player_name + ". How was your summer break?"],[]],
-		2 : [["Great " + player_name + ". My summer was not that good. I enjoyed the first month very much. But then, afterwards I got very bored."]]
+		1 : [[player_name + " : Hey Ron!", "Ron : Hello " + player_name + ". How was your summer break?"],["SHOPPING"]],
+		2 : [["Great " + player_name + ". My summer was not that good. I enjoyed the first month very much. But then, afterwards I got very bored."]],
+		3 : [[],[]],
+		4 : [[],[]],
+		5 : [[],[]]
+	}
+	follow_up_question = {
+		1 : [2,-1],
+		2 : [3],
+		3 : [4,5],
+		4 : [-1,-1],
+		5 : [-1,4]
 	}
 	pass
 	
@@ -80,6 +91,10 @@ func qna_flow():
 	pass
 
 func ask_question(var qn: int):
+	if(qn < 1):
+		print("No questions left in this level..")
+		return
+	
 	print("\nPopping up Qn:", qn)
 	
 	var qna_popup = UtilityFuncs.QnA.instance()
@@ -91,8 +106,6 @@ func ask_question(var qn: int):
 	
 	while(runtime_data[key] == false):
 		OS.delay_msec(100)
-
-	#print("Answer to Qn : ", qn, " is ", UtilityFuncs.read_saved_answer(qn))
 	
 	return
 
@@ -101,6 +114,7 @@ func proceed_from_qn(var qn: int):
 	#print('In runtime_data, setting KEY as ', key )
 	runtime_data[key] = true
 	var recent_answer = UtilityFuncs.read_saved_answer(qn)
+	print("Answer to Qn : ", qn, " is ", recent_answer)
 	
 	var dialogs = follow_up_dialogs[qn]
 	#print(dialogs)
@@ -116,7 +130,21 @@ func proceed_from_qn(var qn: int):
 		for line in dialogs[0]:
 				print(line)
 	
-	pass
+	if (follow_up_question[qn].size() > 1):
+		thread = Thread.new()
+		
+		if(recent_answer):
+			print("Supposed to pop ", follow_up_question[qn][0])
+			thread.start(self, "ask_question", follow_up_question[qn][0])
+		else:
+			print("Supposed to pop ", follow_up_question[qn][1])
+			thread.start(self, "ask_question", follow_up_question[qn][1])
+	else:
+		#print(follow_up_dialogs[qn])
+		print("Supposed to pop ", follow_up_question[qn][0])
+		thread.start(self, "ask_question", follow_up_dialogs[qn][0])
+	
+	return
 
 #func qna_manager():
 #	thread = Thread.new()
